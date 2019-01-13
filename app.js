@@ -61,7 +61,7 @@ app.post('/login', function(req,res)
 				else
 				{
                     req.session.user = profile;
-					res.redirect('/index.html');
+					res.redirect('/');
 
 				}
 			});
@@ -69,6 +69,14 @@ app.post('/login', function(req,res)
 	}); 
 });
 
+app.get("/", function(req, res) {
+	var query_all_projs = Project.find({}, function(err, projects)
+	{
+		console.log(projects[0]);
+		console.log(projects[0].deadlineDate);
+		res.render("index.ejs", {projects:projects});
+	});
+});
 
 app.get("/projects/:id", function(req, res, cb){
 	var id = ObjectId(req.params.id);
@@ -79,7 +87,7 @@ app.get("/projects/:id", function(req, res, cb){
 
 		//if no error, then we know project
 
-		res.render("single.ejs", {title: project.title, description: project.briefDescription, imageName: "/images/" + project.image}); 
+		res.render("single.ejs", {project: project}); 
 
 	});
 });
@@ -131,7 +139,7 @@ var upload = multer({ storage: storage })
 var Project = mongoose.model('projects', projectSchema);
 
 
-app.post('/project_create.html', upload.single('pic'), function(req,res)
+app.post('/project_create/', upload.single('pic'), function(req,res)
 {
 	//get image		
 	if (!req.file) {
@@ -147,7 +155,7 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 	{
 		title: req.body.projectname,
 		briefDescription: req.body.description,
-		deadlineDate: req.body.deadline,
+		deadlineDate: req.body.projectdeadline,
 		image: req.file.filename,
 		category: req.body.Category,
 		percentPayout1: req.body.payout1,
@@ -162,12 +170,48 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 		percentPayout4: req.body.payout4,
 		milestoneDeadline4: req.body.deadline4,
 		milestoneDescr4: req.body.description4,
-
+		creator: req.body.creator,
+		currentFundraising: 0
 	});
 	newProj.save();
 
-	
+    res.redirect("/project_submit.html")	
 
+});
+
+
+app.get('/contributions/:id', function(req,res)
+{
+	var id = ObjectId(req.params.id);
+
+	var query = Project.findOne({_id:id}, function(err, project)
+	{
+		if(err) return cb(err);
+
+		//if no error, then we know project
+
+		res.render("contribute.ejs", {project: project}); 
+
+	});
+
+});
+
+app.post('/contributions/:id', function(req, res)
+{
+	var id = ObjectId(req.params.id);
+
+	var query = Project.findOne({_id:id}, function(err, project)
+	{
+		if(err) return cb(err);
+
+		var funds = parseFloat(req.body.amount);
+
+		//if no error, then we know project
+		project.currentFundraising += funds;
+		project.save();
+
+		res.redirect('/');
+	});
 });
 
 

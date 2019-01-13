@@ -6,10 +6,10 @@
 -->
 <html>
 	<head>
-		<title>The Hover Bike</title>
+		<title><%= project.title %></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 	</head>
 	<body class="single is-preload">
 
@@ -18,7 +18,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">MABAE</a></h1>
+						<h1><a href="/">MABAE</a></h1>
 						<nav class="links">
 							<ul>
 								<li><a href="#"> <strong>Create-A-Project</strong> </a></li>
@@ -95,23 +95,19 @@
 					<div id="main">
 
 						<!-- Post -->
-							<article class="post">
+							<article class="post" style="overflow:auto;padding-bottom:2em">
 								<header>
 									<div class="title">
-										<h2><a href="#"><%= title %> </a></h2>
-										<p> <%= briefDescrip %> </p>
+										<h2><a href="/projects/<%= project._id %>"><%= project.title %></a></h2>
 									</div>
 									<div class="meta">
+										<time class="published" datetime="2019-13-01"><%= project.finalDeadLine %></time>
+										<span style="display: inline;" class="author">By</span><a href="#" class="author" style="display: inline; float: right; padding-left: .5em"><span class="name"><%= project.creator %></span></a>
 									</div>
 								</header>
-								<span class="image featured"><img src=<%= imageName %>  style="max-height:50%; max-width:30%;" /></span>
-								<p> <%= description %> </p>
+								<span class="image featured" style="margin: 0 auto;"><img src="/assets/images/<%= project.image %>"  style="max-height:50%; max-width:30%; float:left;" /><p style="margin-left: 32.5%; max-width:70%;"> <%= project.briefDescription %> </p></span>
 								<footer>
-									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon fa-heart">28+</a></li>
-										<li><a href="#" class="icon fa-comment">128+</a></li>
-									</ul>
+									<a href="#" style = "font-size:3em; margin-left:5%;" class="icon fa-money"><%= project.currentFundraising %></a>
 								</footer>
 							</article>
 
@@ -129,7 +125,6 @@
 									            <div class="meta">
 									        </div>
 								</header>
-								<span class="image featured"><img src="project_images/hoverBike.jpg"  style="max-height:50%; max-width:30%;" /></span>
 								<p>Project Discription </p>
 								<footer>
 									<ul class="stats">
@@ -156,11 +151,11 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
 
 	</body>
 </html>
