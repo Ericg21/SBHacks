@@ -171,6 +171,13 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 });
 
 
+app.post('/contributions/:id', function(req,res)
+{
+	var id = ObjectId(req.params.id);
+	res.render("contribute.ejs", {project:project});
+});
+
+
 
 
 
