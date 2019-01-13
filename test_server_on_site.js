@@ -1,6 +1,7 @@
-var MyMongoose = require('./generalized_exportable_mongoose.js');
+var imports = require('./export_m.js');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt');
 
 //Set up mongoose connection
 var mongoDB = "mongodb://localhost:27017/test";
@@ -21,21 +22,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /*
 SCHEMAS
 */
-Schema = mongoose.Schema;
-
-var ProfileSchema = new Schema
-({
-	username: String,
-	firstname: String,
-	lastname: String,
-	password: String,
-	projects: [ { _id: Schema.Types.ObjectId, name: String} ] 
-});
-
-//define a virtul property for the schema (don't have to concatenate name every time
-ProfileSchema.virtual('fullname').get(function() {
-	return this.firstname + " " + this.lastname;
-});
+Schema = imports.Schema;
+ProfileSchema = imports.ProfileSchema;
 
 //define a function for all profile objects
 ProfileSchema.statics.findByFullName = function(name) {
@@ -46,7 +34,6 @@ ProfileSchema.statics.findByFullName = function(name) {
 ProfileSchema.statics.findById = function(id) {
 	return this.findOne( { _id: id} ); 
 };
-
 
 
 /*
