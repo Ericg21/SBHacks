@@ -49,7 +49,7 @@ app.post('/login', function(req,res)
 			console.log("Huston, we have a problem", err);
 		}
 		else if(!profile){
-			res.redirect('/login.html#wrong_password');
+			res.redirect('/login#wrong_password');
 		}
 		else
 		{
@@ -158,7 +158,7 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 		milestoneDescr2: req.body.description2,
 		percentPayout3: req.body.payout3,
 		milestoneDeadline3: req.body.deadline3,
-		milestoneDescr3: req.body.req.body.description3,
+		milestoneDescr3: req.body.description3,
 		percentPayout4: req.body.payout4,
 		milestoneDeadline4: req.body.deadline4,
 		milestoneDescr4: req.body.description4,
