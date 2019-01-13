@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var imports = require("./export_m.js");
+var imports = require("./models/ProfileSchema.js");
 
 //Set up mongoose connection
 var mongoDB = "mongodb://localhost:27017/test";
@@ -49,6 +49,9 @@ app.get('/',function(req,res)
 app.get('/signin',function(req,res)
 {
 	res.send("SIGNIN");
+});
+app.get('/viewtest', function(req, res){
+    res.render("helloworld.ejs", {fname: "Andrew", lname: "Gaut"});
 });
 
 app.get('/databasetests',function(req,res)
