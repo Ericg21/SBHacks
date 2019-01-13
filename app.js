@@ -11,6 +11,8 @@ var app = express();
 app.use(session({ secret: 'WESHOULDCHANGETHISINTOSOMETHINGIFTHISISFORREAL', cookie: {maxAge: 60000}}));
 app.use(morgan('dev'));
 
+var ObjectId = mongoose.Types.ObjectId;
+
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -68,6 +70,19 @@ app.post('/login', function(req,res)
 });
 
 
+app.get("/projects/:id", function(req, res, cb){
+	var id = ObjectId(req.params.id);
+	
+	var query = Project.findOne({_id:id}, function(err, project)
+	{
+		if(err) return cb(err);
+
+		//if no error, then we know project
+
+		res.render("single.ejs", {title: project.title, description: project.briefDescription, imageName: "/images/" + project.image); 
+
+	});
+});
 
 //Register account creation
 app.post('/account_creation.html', function(req,res)
@@ -102,7 +117,12 @@ var storage = multer.diskStorage
 ({
  	destination: './public/assets/images',
 	filename: function(req, file, cb) {
-		cb(null, file.fieldname + '-' + Date.now())
+		filetypes = {"image/gif": ".gif", "image/jpeg" : ".jpg", "image/x-citrix-jpeg": ".jpg", "image/png": ".png", "image/x-citrix-png": ".png", "image/x-png": ".png"}
+		if(!(file.mimetype in filetypes)) {
+			return cb(new Error("Mimetype not supported"));
+		}
+		
+		cb(null, file.fieldname + '-' + Date.now() + filetypes[file.mimetype]);
 	}
 });
 var upload = multer({ storage: storage })
