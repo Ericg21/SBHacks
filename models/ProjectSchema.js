@@ -27,25 +27,20 @@ module.exports = new Schema
 	finalDeadline: String //format: year-month-day,
 });
 
+module.exports.virtual('formattedFinalDeadline').get(function()
+{
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                    'September', 'October', 'November', 'December']
+    var year = this.finalDeadline(0,4);
+    var month = this.finalDeadine(5,7);
+    var day = this.finalDeadline(9,11);
 
+    return months[month] + " " + day + ", " + year;
+});
 
 /*
 USAGE EXAMPLE:
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

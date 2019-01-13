@@ -2762,7 +2762,7 @@ input, select, textarea {
 			}
 
 				.post > header .meta > * {
-					margin: 0 0 1em 0;
+					margin: .75em 0 0 0;
 				}
 
 				.post > header .meta > :last-child {
