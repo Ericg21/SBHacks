@@ -24,7 +24,8 @@ module.exports = new Schema
 	percentPayout4: Number, 
 	milestoneDeadline4: String,
 	milestoneDescr4:String,
-	finalDeadline: String //format: year-month-day,
+	finalDeadline: String, //format: year-month-day,
+	currentFundraising: Number //current fundraising sum
 });
 
 module.exports.virtual('formattedFinalDeadline').get(function()
