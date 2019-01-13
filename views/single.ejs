@@ -6,10 +6,10 @@
 -->
 <html>
 	<head>
-		<title>The Hover Bike</title>
+		<title><%= project.title %></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 	</head>
 	<body class="single is-preload">
 
@@ -98,14 +98,13 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="#"><%= title %> </a></h2>
-										<p> <%= briefDescrip %> </p>
+										<h2><a href="#"><%= project.title %> </a></h2>
+										<p> <%= project.briefDescription %> </p>
 									</div>
 									<div class="meta">
 									</div>
 								</header>
-								<span class="image featured"><img src=<%= imageName %>  style="max-height:50%; max-width:30%;" /></span>
-								<p> <%= description %> </p>
+								<p> <%= project.briefDescription %> </p>
 								<footer>
 									<ul class="stats">
 										<li><a href="#">General</a></li>
@@ -156,11 +155,11 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
 
 	</body>
 </html>

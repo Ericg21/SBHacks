@@ -85,7 +85,7 @@ app.get("/projects/:id", function(req, res, cb){
 
 		//if no error, then we know project
 
-		res.render("single.ejs", {title: project.title, description: project.briefDescription, imageName: "/images/" + project.image}); 
+		res.render("single.ejs", {project: project}); 
 
 	});
 });
