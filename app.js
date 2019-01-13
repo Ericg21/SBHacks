@@ -168,7 +168,8 @@ app.post('/project_create/', upload.single('pic'), function(req,res)
 		percentPayout4: req.body.payout4,
 		milestoneDeadline4: req.body.deadline4,
 		milestoneDescr4: req.body.description4,
-		creator: req.body.creator
+		creator: req.body.creator,
+		currentFundraising: 0
 	});
 	newProj.save();
 
