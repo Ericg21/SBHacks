@@ -95,22 +95,19 @@
 					<div id="main">
 
 						<!-- Post -->
-							<article class="post">
+							<article class="post" style="overflow:auto;padding-bottom:2em">
 								<header>
 									<div class="title">
-										<h2><a href="#"><%= project.title %> </a></h2>
-										<p> <%= project.briefDescription %> </p>
+										<h2><a href="/projects/<%= project._id %>"><%= project.title %></a></h2>
 									</div>
 									<div class="meta">
+										<time class="published" datetime="2019-13-01"><%= project.finalDeadLine %></time>
+										<span style="display: inline;" class="author">By</span><a href="#" class="author" style="display: inline; float: right; padding-left: .5em"><span class="name"><%= project.creator %></span></a>
 									</div>
 								</header>
-								<p> <%= project.briefDescription %> </p>
+								<span class="image featured" style="margin: 0 auto;"><img src="/assets/images/<%= project.image %>"  style="max-height:50%; max-width:30%; float:left;" /><p style="margin-left: 32.5%; max-width:70%;"> <%= project.briefDescription %> </p></span>
 								<footer>
-									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon fa-heart">28+</a></li>
-										<li><a href="#" class="icon fa-comment">128+</a></li>
-									</ul>
+									<a href="#" style = "font-size:3em; margin-left:5%;" class="icon fa-money"><%= project.currentFundraising %></a>
 								</footer>
 							</article>
 
@@ -128,7 +125,6 @@
 									            <div class="meta">
 									        </div>
 								</header>
-								<span class="image featured"><img src="/assets/images/<%= project.image %>"  style="max-height:50%; max-width:30%;" /></span>
 								<p>Project Discription </p>
 								<footer>
 									<ul class="stats">
