@@ -3,7 +3,14 @@ var projectSchema = require('./models/ProjectSchema.js');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var express = require('express');
+var session  = require('express-session');
+var multer = require('multer');
+var morgan = require('morgan');
+
 var app = express();
+app.use(session({ secret: 'WESHOULDCHANGETHISINTOSOMETHINGIFTHISISFORREAL', cookie: {maxAge: 60000}}));
+app.use(morgan('dev'));
+
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,10 +25,15 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise; //make sure using correct library
 var db = mongoose.connection;
 
+//Bind connection to error event (so get notification of connetion errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
 //get Profiles collection
 var Profile = mongoose.model('Profile', ProfileSchema);
 
-//Register form inputs on login page
+//Register form login page
 app.post('/login', function(req,res)
 {
 	var uname = req.body.username;
@@ -42,10 +54,11 @@ app.post('/login', function(req,res)
 			profile.comparePassword(pword, function(err, match){
 				if (!match || err) 
 				{
-					res.redirect('/login.html#wrong_password');
+					res.redirect('/login#wrong_password');
 				}
 				else
 				{
+                    req.session.user = profile;
 					res.redirect('/index.html');
 
 				}
@@ -58,7 +71,6 @@ app.post('/login', function(req,res)
 //Register account creation
 app.post('/account_creation.html', function(req,res)
 {
-	console.log("start");
 	var newUser = new Profile(
 	{
 		username: req.body.username,
@@ -66,11 +78,47 @@ app.post('/account_creation.html', function(req,res)
 		lastname: req.body.lastname,
 		email: req.body.email
 	});
-	console.log("done");
+	newUser.setPassword(req.body.password, function(err){
+		if(err) console.log("ERRORRRR setting passhash");
+		newUser.save(function(err)
+		{
+			if(err) console.log("SAVE ERROR: " + err);
+			else
+			{
+				res.redirect('/');
+			}
+		});
+	});
 
-	newUser.setPassword(req.body.password);
-	console.log("pword done");
-	newUser.save();
+	//check if username or password is taken
+	//DO THISSSSS -- use queries
+
+});
+
+
+//Multer setup
+var storage = multer.diskStorage
+({
+ 	destination: './public/assets/images',
+	filename: function(req, file, cb) {
+		cb(null, file.fieldname + '-' + Date.now())
+	}
+});
+var upload = multer({ storage: storage })
+
+app.post('/project_create.html', upload.single('pic'), function(req,res)
+{
+	//get image		
+	if (!req.file) {
+	    console.log("No file received");
+        } 
+	else {
+		console.log('file received');
+	}
+
+
+
+
 });
 
 
@@ -97,6 +145,4 @@ app.post('/account_creation.html', function(req,res)
 
 
 
-
-
-
+// images: make sure no slashes; use multer
