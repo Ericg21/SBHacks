@@ -158,10 +158,10 @@
 			<script src="/assets/js/main.js"></script>
 			<script type="text/javascript">
 				var img = document.getElementById("milestone_image");
-				var deadline1 = <%= project.milestoneDeadline1 %>;
-				var deadline2 = <%= project.milestoneDeadline2 %>;
-				var deadline3 = <%= project.milestoneDeadline3 %>;
-				var deadline4 = <%= project.milestoneDeadline4 %>;
+				var deadline1 = "<%= project.milestoneDeadline1 %>";
+				var deadline2 = "<%= project.milestoneDeadline2 %>";
+				var deadline3 = "<%= project.milestoneDeadline3 %>";
+				var deadline4 = "<%= project.milestoneDeadline4 %>";
 				var d = new Date();
 				var todayDay = d.getDate();
 				var todayYear = d.getFullYear();
