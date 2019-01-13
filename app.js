@@ -193,6 +193,42 @@ app.get('/contributions/:id', function(req,res)
 
 });
 
+app.post('/contributions/:id', function(req, res)
+{
+	var id = ObjectId(req.params.id);
+
+	var query = Project.findOne({_id:id}, function(err, project)
+	{
+		if(err) return cb(err);
+
+		/*
+		var fundsForMilestone1 = parseFloat(req.body.one);
+		var fundsForMilestone2 = parseFloat(req.body.two);
+		var fundsForMilestone3 = parseFloat(req.body.three);
+		var fundsForMilestone4 = parseFloat(req.body.four);
+		var totalFunds = fundsForMilestone1 + fundsForMilestone2 + fundsForMilestone3 + fundsForMilestone4;
+
+
+		console.log("funds milestone1: " + fundsForMilestone1);
+		console.log("funds milestone2: " + fundsForMilestone2);
+		console.log("funds milestone3: " + fundsForMilestone3);
+		console.log("funds milestone4: " + fundsForMilestone4);
+
+
+
+		console.log("TOTALFUNDs: " + totalFunds);
+		*/
+
+		var funds = parseFloat(req.body.amount);
+
+		//if no error, then we know project
+		project.currentFundraising += funds;
+		project.save();
+
+		res.redirect('/');
+	});
+});
+
 
 
 
