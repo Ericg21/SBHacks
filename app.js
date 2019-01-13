@@ -61,7 +61,7 @@ app.post('/login', function(req,res)
 				else
 				{
                     req.session.user = profile;
-					res.redirect('/index.html');
+					res.redirect('/');
 
 				}
 			});
@@ -137,7 +137,7 @@ var upload = multer({ storage: storage })
 var Project = mongoose.model('projects', projectSchema);
 
 
-app.post('/project_create.html', upload.single('pic'), function(req,res)
+app.post('/project_create/', upload.single('pic'), function(req,res)
 {
 	//get image		
 	if (!req.file) {
@@ -172,7 +172,7 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 	});
 	newProj.save();
 
-	
+    res.redirect("/project_submit.html")	
 
 });
 
