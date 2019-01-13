@@ -69,6 +69,12 @@ app.post('/login', function(req,res)
 	}); 
 });
 
+app.get("/", function(req, res) {
+	var query_all_projs = Project.find({}, function(err, projects)
+	{
+		res.render("index.ejs", {projects:projects});
+	});
+});
 
 app.get("/projects/:id", function(req, res, cb){
 	var id = ObjectId(req.params.id);
@@ -79,7 +85,7 @@ app.get("/projects/:id", function(req, res, cb){
 
 		//if no error, then we know project
 
-		res.render("single.ejs", {title: project.title, description: project.briefDescription, imageName: "/images/" + project.image}); 
+		res.render("single.ejs", {project: project}); 
 
 	});
 });
