@@ -78,6 +78,7 @@ app.post('/account_creation.html', function(req,res)
 	newUser.setPassword(req.body.password);
 
 	//check if username or password is taken
+	//DO THISSSSS -- use queries
 
 
 	newUser.save(function(err)
