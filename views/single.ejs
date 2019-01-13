@@ -157,11 +157,13 @@
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
 			<script type="text/javascript">
+				console.log("STARTTTTTTT");
 				var img = document.getElementById("milestone_image");
 				var deadline1 = <%= project.milestoneDeadline1 %>;
 				var deadline2 = <%= project.milestoneDeadline2 %>;
 				var deadline3 = <%= project.milestoneDeadline3 %>;
 				var deadline4 = <%= project.milestoneDeadline4 %>;
+				console.log("LOGGGGGGGGGGGGGGGGGGGGGGGGG: " + deadline1,deadline2,deadline3,deadline4);
 				var d = new Date();
 				var todayDay = d.getDate();
 				var todayYear = d.getFullYear();
@@ -212,6 +214,5 @@
 					img.src = "/images/Milestone4.png";
 				}
 			</script>
-
 	</body>
 </html>
