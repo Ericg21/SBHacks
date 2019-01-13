@@ -13,11 +13,11 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Start the server
-app.listen(3000, () => console.log(`Example app listening on port 3000`));
+app.listen(8080, () => console.log(`Example app listening on port 3000`));
 
 
 //Set up mongoose connection
-var mongoDB = "mongodb://localhost:27017/test";
+var mongoDB = "mongodb://gclouduser:WtHrbJcbF2iJ65DU@hackathoncluster-shard-00-00-btz7k.gcp.mongodb.net:27017,hackathoncluster-shard-00-01-btz7k.gcp.mongodb.net:27017,hackathoncluster-shard-00-02-btz7k.gcp.mongodb.net:27017/test?ssl=true&replicaSet=HackathonCluster-shard-0&authSource=admin&retryWrites=true";
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise; //make sure using correct library
 var db = mongoose.connection;
