@@ -168,7 +168,7 @@ app.post('/project_create/', upload.single('pic'), function(req,res)
 		percentPayout4: req.body.payout4,
 		milestoneDeadline4: req.body.deadline4,
 		milestoneDescr4: req.body.description4,
-
+		creator: req.body.creator
 	});
 	newProj.save();
 
@@ -200,24 +200,6 @@ app.post('/contributions/:id', function(req, res)
 	var query = Project.findOne({_id:id}, function(err, project)
 	{
 		if(err) return cb(err);
-
-		/*
-		var fundsForMilestone1 = parseFloat(req.body.one);
-		var fundsForMilestone2 = parseFloat(req.body.two);
-		var fundsForMilestone3 = parseFloat(req.body.three);
-		var fundsForMilestone4 = parseFloat(req.body.four);
-		var totalFunds = fundsForMilestone1 + fundsForMilestone2 + fundsForMilestone3 + fundsForMilestone4;
-
-
-		console.log("funds milestone1: " + fundsForMilestone1);
-		console.log("funds milestone2: " + fundsForMilestone2);
-		console.log("funds milestone3: " + fundsForMilestone3);
-		console.log("funds milestone4: " + fundsForMilestone4);
-
-
-
-		console.log("TOTALFUNDs: " + totalFunds);
-		*/
 
 		var funds = parseFloat(req.body.amount);
 

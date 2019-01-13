@@ -25,7 +25,8 @@ module.exports = new Schema
 	milestoneDeadline4: String,
 	milestoneDescr4:String,
 	finalDeadline: String, //format: year-month-day,
-	currentFundraising: Number //current fundraising sum
+	currentFundraising: Number, //current fundraising sum
+	creator: String //creator of project
 });
 
 module.exports.virtual('formattedFinalDeadline').get(function()
