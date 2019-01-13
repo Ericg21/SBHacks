@@ -159,11 +159,18 @@
 			<script type="text/javascript">
 				console.log("STARTTTTTTT");
 				var img = document.getElementById("milestone_image");
+<<<<<<< HEAD
 				var deadline1 = <%= project.milestoneDeadline1 %>;
 				var deadline2 = <%= project.milestoneDeadline2 %>;
 				var deadline3 = <%= project.milestoneDeadline3 %>;
 				var deadline4 = <%= project.milestoneDeadline4 %>;
 				console.log("LOGGGGGGGGGGGGGGGGGGGGGGGGG: " + deadline1,deadline2,deadline3,deadline4);
+=======
+				var deadline1 = "<%= project.milestoneDeadline1 %>";
+				var deadline2 = "<%= project.milestoneDeadline2 %>";
+				var deadline3 = "<%= project.milestoneDeadline3 %>";
+				var deadline4 = "<%= project.milestoneDeadline4 %>";
+>>>>>>> 5b285480b1952e1a3a087413e4a524376287de49
 				var d = new Date();
 				var todayDay = d.getDate();
 				var todayYear = d.getFullYear();
