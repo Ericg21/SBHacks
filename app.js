@@ -177,10 +177,20 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 });
 
 
-app.post('/contributions/:id', function(req,res)
+app.get('/contributions/:id', function(req,res)
 {
 	var id = ObjectId(req.params.id);
-	res.render("contribute.ejs", {project:project});
+
+	var query = Project.findOne({_id:id}, function(err, project)
+	{
+		if(err) return cb(err);
+
+		//if no error, then we know project
+
+		res.render("contribute.ejs", {project: project}); 
+
+	});
+
 });
 
 
