@@ -29,7 +29,7 @@ ProfileSchema.methods.setPassword = function(password, cb)
 		bcrypt.hash(password, salt, function(err, hash){
 			if(err) return cb(err);
 			theObj.passhash = hash;
-			//cb(err, hash);
+			cb(err, hash);
 		});
 	});
 	

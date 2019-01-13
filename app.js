@@ -4,9 +4,12 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var express = require('express');
 var session  = require('express-session');
+var multer = require('multer');
+var morgan = require('morgan');
 
 var app = express();
 app.use(session({ secret: 'WESHOULDCHANGETHISINTOSOMETHINGIFTHISISFORREAL', cookie: {maxAge: 60000}}));
+app.use(morgan('dev'));
 
 
 app.use(express.static('public'));
@@ -51,7 +54,7 @@ app.post('/login', function(req,res)
 			profile.comparePassword(pword, function(err, match){
 				if (!match || err) 
 				{
-					res.redirect('/login.html#wrong_password');
+					res.redirect('/login#wrong_password');
 				}
 				else
 				{
@@ -75,20 +78,47 @@ app.post('/account_creation.html', function(req,res)
 		lastname: req.body.lastname,
 		email: req.body.email
 	});
-	newUser.setPassword(req.body.password);
+	newUser.setPassword(req.body.password, function(err){
+		if(err) console.log("ERRORRRR setting passhash");
+		newUser.save(function(err)
+		{
+			if(err) console.log("SAVE ERROR: " + err);
+			else
+			{
+				res.redirect('/');
+			}
+		});
+	});
 
 	//check if username or password is taken
 	//DO THISSSSS -- use queries
 
+});
 
-	newUser.save(function(err)
-	{
-		if(err) console.log("SAVE ERROR: " + err);
-		else
-		{
-			res.redirect('/');
-		}
-	});
+
+//Multer setup
+var storage = multer.diskStorage
+({
+ 	destination: './public/assets/images',
+	filename: function(req, file, cb) {
+		cb(null, file.fieldname + '-' + Date.now())
+	}
+});
+var upload = multer({ storage: storage })
+
+app.post('/project_create.html', upload.single('pic'), function(req,res)
+{
+	//get image		
+	if (!req.file) {
+	    console.log("No file received");
+        } 
+	else {
+		console.log('file received');
+	}
+
+
+
+
 });
 
 
@@ -115,6 +145,4 @@ app.post('/account_creation.html', function(req,res)
 
 
 
-
-
-
+// images: make sure no slashes; use multer
