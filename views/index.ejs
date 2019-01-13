@@ -96,20 +96,21 @@ x<!DOCTYPE HTML>
 					<div id="main">
 						<div><h2 style="padding-left: 2.5%">Top Community Projects</h2></div>
 						<!-- Post -->
+							<% for(var project of projects) { %>
 							<article class="post">
 								<header>
 									<div class="title">
 
-										<h2><a href="single.html">Retrograde Stapler 3000</a></h2>
+										<h2><a href="/projects/<%= project._id %>"><%= project.title %></a></h2>
 										
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2019-13-01">January 13, 2018</time>
-										<span style="display: inline;" class="author">By</span><a href="#" class="author" style="display: inline; float: right; padding-left: .5em"><span class="name">Jane Doe</span></a>
+										<time class="published" datetime="2019-13-01"><%= project.finalDeadLine %></time>
+										<span style="display: inline;" class="author">By</span><a href="#" class="author" style="display: inline; float: right; padding-left: .5em"><span class="name"><%= project.creator %></span></a>
 									</div>
 								</header>
-								<a href="single.html" class="image featured"><img src="images/myStapler.jpg" alt="" /></a>
-								<p>When the world is falling apart who can you depend on to keep you together…. The stapler. The next-generation design allows for rapid fire disbursement of staplers through a mobile app</p>
+								<a href="/projects/<%= project._id %>" class="image featured"><img src="/assets/images/<%= project.image %>" alt="" /></a>
+								<p><%= project.briefDescription %></p>
 								<footer>
 									<ul class="actions">
 										<li><a href="single.html" class="button large">Continue Reading</a></li>
@@ -122,58 +123,8 @@ x<!DOCTYPE HTML>
 									</ul>
 								</footer>
 							</article>
-
-						<!-- Post -->
-							<article class="post">
-								<header>
-									<div class="title">
-										<h2><a href="single.html">Capitalist Beer Die Table</a></h2>
-									</div>
-									<div class="meta">
-										<time class="published" datetime="2015-10-25">October 25, 2018</time>
-										<span style="display: inline;" class="author">By</span><a href="#" class="author" style="display: inline; float: right; padding-left: .5em"><span class="name">Jane Doe</span></a>
-									</div>
-								</header>
-								<a href="single.html" class="image featured"><img src="images/dieUp.jpg" alt="" /></a>
-								<p>Die-up!!! The die don’t lie but why leave it to that? Now NCAA, NBA, NFL,NSA, and NASA regulation beer die tables from ArgCowboy Company. Affordable, customizable, and easy to build ArgCowboy allow students to toss ‘em up on a personalized table.</p>
-								<footer>
-									<ul class="actions">
-										<li><a href="single.html" class="button large">Continue Reading</a></li>
-										<li><a href="contribute.html" class="button large">Contribute</a></li>
-									</ul>
-									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon fa-heart">28</a></li>
-										<li><a href="#" class="icon fa-comment">128</a></li>
-									</ul>
-								</footer>
-							</article>
-
-						<!-- Post -->
-							<article class="post">
-								<header>
-									<div class="title">
-										<h2><a href="single.html">Ball-Don't-Lie</a></h2>
-									</div>
-									<div class="meta">
-										<time class="published" datetime="2015-10-22">October 22, 2018</time>
-										<span style="display: inline;" class="author">By</span><a href="#" class="author" style="display: inline; float: right; padding-left: .5em"><span class="name">Jane Doe</span></a>
-									</div>
-								</header>
-								<a href="single.html" class="image featured"><img src="images/tennis.jpg" alt="" /></a>
-								<p>From the development team 'Fab-Five' Ball-Don't-Lie is a web/mobile application where you can challenge other competitors in sport of your choice. See who's free and link up to see who's the real top dog. Think you're the next Nadal? Bet. Alex Morgan? Prove it. Lavar Ball? I hope so.</p>
-								<footer>
-									<ul class="actions">
-										<li><a href="single.html" class="button large">Continue Reading</a></li>
-										<li><a href="contribute.html" class="button large">Contribute</a></li>
-									</ul>
-									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon fa-heart">28</a></li>
-										<li><a href="#" class="icon fa-comment">128</a></li>
-									</ul>
-								</footer>
-							</article>
+							<% } %>
+							
 
 						<!-- Pagination -->
 							<ul class="actions pagination">
