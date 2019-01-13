@@ -125,7 +125,7 @@
 									            <div class="meta">
 									        </div>
 								</header>
-								<p>Project Discription </p>
+								<img id="milestone_image" src="" alt="Milestone dates not available" style="max-width:80%;">
 								<footer>
 									<ul class="stats">
 										<li><a href="#">General</a></li>
@@ -156,6 +156,62 @@
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
+			<script type="text/javascript">
+				var img = document.getElementById("milestone_image");
+				var deadline1 = <%= project.milestoneDeadline1 %>;
+				var deadline2 = <%= project.milestoneDeadline2 %>;
+				var deadline3 = <%= project.milestoneDeadline3 %>;
+				var deadline4 = <%= project.milestoneDeadline4 %>;
+				var d = new Date();
+				var todayDay = d.getDate();
+				var todayYear = d.getFullYear();
+				var todayMonth = d.getMonth();
+				var year = [deadline1.substr(0,4),deadline2.substr(0,4),deadline3.substr(0,4),deadline4.substr(0,4)];
+				var month = [deadline1.substr(5,2),deadline2.substr(5,2),deadline3.substr(5,2),deadline4.substr(5,2)];
+				var day = [deadline1.substr(8,2),deadline2.substr(8,2),deadline3.substr(8,2),deadline4.substr(8,2)];
+				var milestone_number = 0;
+				for (var i = 0; i < 4; i++) {
+					if(year[i]>todayYear)	{
+						milestone_number = i;
+						break;
+					}
+					if(year[i]<todayYear)	{
+						milestone_number = i+1;
+						continue;
+					}
+					if(year[i]==todayYear)	{
+						if(month[i]>todayMonth)	{
+							milestone_number = i;
+							break;
+						} else if(month[i]<todayMonth)	{
+							milestone_number = i+1;
+							continue;
+						} else {
+							if(day[i]>todayDay)	{
+								milestone_number = i;
+								break;
+							} else if(day[i]<todayDay)	{
+								milestone_number = i+1;
+								continue;
+							} else	{
+								milestone_number = i+1;
+								break;
+							}
+						}
+					}
+				}
+				if(milestone_number==0)	{
+					img.src = "/images/Milestone0.png";
+				} else if(milestone_number==1)	{
+					img.src = "/images/Milestone1.png";
+				} else if(milestone_number==2)	{
+					img.src = "/images/Milestone2.png";
+				} else if(milestone_number==3)	{
+					img.src = "/images/Milestone3.png";
+				} else if(milestone_number==4)	{
+					img.src = "/images/Milestone4.png";
+				}
+			</script>
 
 	</body>
 </html>
