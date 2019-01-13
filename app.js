@@ -18,10 +18,15 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise; //make sure using correct library
 var db = mongoose.connection;
 
+//Bind connection to error event (so get notification of connetion errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
 //get Profiles collection
 var Profile = mongoose.model('Profile', ProfileSchema);
 
-//Register form inputs on login page
+//Register form login page
 app.post('/login', function(req,res)
 {
 	var uname = req.body.username;
@@ -58,7 +63,6 @@ app.post('/login', function(req,res)
 //Register account creation
 app.post('/account_creation.html', function(req,res)
 {
-	console.log("start");
 	var newUser = new Profile(
 	{
 		username: req.body.username,
@@ -66,11 +70,19 @@ app.post('/account_creation.html', function(req,res)
 		lastname: req.body.lastname,
 		email: req.body.email
 	});
-	console.log("done");
-
 	newUser.setPassword(req.body.password);
-	console.log("pword done");
-	newUser.save();
+
+	//check if username or password is taken
+
+
+	newUser.save(function(err)
+	{
+		if(err) console.log("SAVE ERROR: " + err);
+		else
+		{
+			res.redirect('/');
+		}
+	});
 });
 
 

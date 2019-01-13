@@ -7,10 +7,10 @@ module.exports.Schema = Schema;
 
 module.exports.ProfileSchema = new Schema
 ({
-	username: String,
-	firstname: String,
-	lastname: String,
-	email: String,
+	username: {type:String, required:true, minlength:4, maxlength:20},
+	firstname: {type:String, required:true, minlength:1, maxlength:20},
+	lastname: {type:String, required:true, minlength:1, maxlength:20},
+	email: {type:String, required:true, minlength:1, maxlength:30},
 	passhash: String,
 	projects: [ { _id: Schema.Types.ObjectId, name: String} ] 
 });
