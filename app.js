@@ -49,7 +49,7 @@ app.post('/login', function(req,res)
 			console.log("Huston, we have a problem", err);
 		}
 		else if(!profile){
-			res.redirect('/login.html#wrong_password');
+			res.redirect('/login#wrong_password');
 		}
 		else
 		{
