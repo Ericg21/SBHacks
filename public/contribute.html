@@ -6,16 +6,17 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<script type="text/javascript">
 			function contributions()	{
+				var payouts = [25, 25, 25, 25];
 				var input = document.getElementById("input");
 				var output1 = document.getElementById("output1");
 				var output2 = document.getElementById("output2");
 				var output3 = document.getElementById("output3");
 				var output4 = document.getElementById("output4");
 				var amount = input.value;
-				output1.value = amount*.25;
-				output2.value = amount*.25;
-				output3.value = amount*.25;
-				output4.value = amount*.25;
+				output1.value = amount*payout[0]/100;
+				output2.value = amount*payout[1]/100;
+				output3.value = amount*payout[2]/100;
+				output4.value = amount*payout[3]/100;
 			}
 		</script>
 	</head>
