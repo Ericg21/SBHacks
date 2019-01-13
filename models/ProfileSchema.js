@@ -10,6 +10,7 @@ module.exports.ProfileSchema = new Schema
 	username: String,
 	firstname: String,
 	lastname: String,
+	email: String,
 	passhash: String,
 	projects: [ { _id: Schema.Types.ObjectId, name: String} ] 
 });
@@ -28,7 +29,7 @@ ProfileSchema.methods.setPassword = function(password, cb)
 		bcrypt.hash(password, salt, function(err, hash){
 			if(err) return cb(err);
 			theObj.passhash = hash;
-			cb(err, hash);
+			//cb(err, hash);
 		});
 	});
 	

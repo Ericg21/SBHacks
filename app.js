@@ -22,7 +22,7 @@ var db = mongoose.connection;
 var Profile = mongoose.model('Profile', ProfileSchema);
 
 //Register form inputs on login page
-app.post('/login.html', function(req,res)
+app.post('/login', function(req,res)
 {
 	var uname = req.body.username;
 	var pword = req.body.password;
@@ -53,6 +53,38 @@ app.post('/login.html', function(req,res)
 		}
 	}); 
 });
+
+
+//Register account creation
+app.post('/account_creation.html', function(req,res)
+{
+	console.log("start");
+	var newUser = new Profile(
+	{
+		username: req.body.username,
+		firstname: req.body.firstname,
+		lastname: req.body.lastname,
+		email: req.body.email
+	});
+	console.log("done");
+
+	newUser.setPassword(req.body.password);
+	console.log("pword done");
+	newUser.save();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
