@@ -3,7 +3,11 @@ var projectSchema = require('./models/ProjectSchema.js');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var express = require('express');
+var session  = require('express-session');
+
 var app = express();
+app.use(session({ secret: 'WESHOULDCHANGETHISINTOSOMETHINGIFTHISISFORREAL', cookie: {maxAge: 60000}}));
+
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -51,6 +55,7 @@ app.post('/login', function(req,res)
 				}
 				else
 				{
+                    req.session.user = profile;
 					res.redirect('/index.html');
 
 				}
