@@ -149,7 +149,20 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
 		briefDescription: req.body.description,
 		deadlineDate: req.body.deadline,
 		image: req.file.filename,
-		category: req.body.Category
+		category: req.body.Category,
+		percentPayout1: req.body.payout1,
+		milestoneDeadline1: req.body.deadline1,
+		milestoneDescr1: req.body.description1,
+		percentPayout2: req.body.payout2,
+		milestoneDeadline2: req.body.deadline2,
+		milestoneDescr2: req.body.description2,
+		percentPayout3: req.body.payout3,
+		milestoneDeadline3: req.body.deadline3,
+		milestoneDescr3: req.body.req.body.description3,
+		percentPayout4: req.body.payout4,
+		milestoneDeadline4: req.body.deadline4,
+		milestoneDescr4: req.body.description4,
+
 	});
 	newProj.save();
 
