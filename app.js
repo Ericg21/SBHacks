@@ -4,9 +4,14 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var express = require('express');
 var session  = require('express-session');
+var multer = require('multer');
+var morgan = require('morgan');
 
 var app = express();
 app.use(session({ secret: 'WESHOULDCHANGETHISINTOSOMETHINGIFTHISISFORREAL', cookie: {maxAge: 60000}}));
+app.use(morgan('dev'));
+
+var ObjectId = mongoose.Types.ObjectId;
 
 
 app.use(express.static('public'));
@@ -44,14 +49,14 @@ app.post('/login', function(req,res)
 			console.log("Huston, we have a problem", err);
 		}
 		else if(!profile){
-			res.redirect('/login.html#wrong_password');
+			res.redirect('/login#wrong_password');
 		}
 		else
 		{
 			profile.comparePassword(pword, function(err, match){
 				if (!match || err) 
 				{
-					res.redirect('/login.html#wrong_password');
+					res.redirect('/login#wrong_password');
 				}
 				else
 				{
@@ -65,6 +70,20 @@ app.post('/login', function(req,res)
 });
 
 
+app.get("/projects/:id", function(req, res, cb){
+	var id = ObjectId(req.params.id);
+	
+	var query = Project.findOne({_id:id}, function(err, project)
+	{
+		if(err) return cb(err);
+
+		//if no error, then we know project
+
+		res.render("single.ejs", {title: project.title, description: project.briefDescription, imageName: "/images/" + project.image}); 
+
+	});
+});
+
 //Register account creation
 app.post('/account_creation.html', function(req,res)
 {
@@ -75,19 +94,80 @@ app.post('/account_creation.html', function(req,res)
 		lastname: req.body.lastname,
 		email: req.body.email
 	});
-	newUser.setPassword(req.body.password);
+	newUser.setPassword(req.body.password, function(err){
+		if(err) console.log("ERRORRRR setting passhash");
+		newUser.save(function(err)
+		{
+			if(err) console.log("SAVE ERROR: " + err);
+			else
+			{
+				res.redirect('/');
+			}
+		});
+	});
 
 	//check if username or password is taken
+	//DO THISSSSS -- use queries
+
+});
 
 
-	newUser.save(function(err)
-	{
-		if(err) console.log("SAVE ERROR: " + err);
-		else
-		{
-			res.redirect('/');
+//Multer setup
+var storage = multer.diskStorage
+({
+ 	destination: './public/assets/images',
+	filename: function(req, file, cb) {
+		filetypes = {"image/gif": ".gif", "image/jpeg" : ".jpg", "image/x-citrix-jpeg": ".jpg", "image/png": ".png", "image/x-citrix-png": ".png", "image/x-png": ".png"}
+		if(!(file.mimetype in filetypes)) {
+			return cb(new Error("Mimetype not supported"));
 		}
+		
+		cb(null, file.fieldname + '-' + Date.now() + filetypes[file.mimetype]);
+	}
+});
+var upload = multer({ storage: storage })
+
+//load project schema and collection
+var Project = mongoose.model('projects', projectSchema);
+
+
+app.post('/project_create.html', upload.single('pic'), function(req,res)
+{
+	//get image		
+	if (!req.file) {
+	    console.log("No file received");
+        } 
+	else {
+		console.log('file received');
+		//multer has automatically saved it
+	}
+
+	//create new project
+	var newProj = new Project(
+	{
+		title: req.body.projectname,
+		briefDescription: req.body.description,
+		deadlineDate: req.body.deadline,
+		image: req.file.filename,
+		category: req.body.Category,
+		percentPayout1: req.body.payout1,
+		milestoneDeadline1: req.body.deadline1,
+		milestoneDescr1: req.body.description1,
+		percentPayout2: req.body.payout2,
+		milestoneDeadline2: req.body.deadline2,
+		milestoneDescr2: req.body.description2,
+		percentPayout3: req.body.payout3,
+		milestoneDeadline3: req.body.deadline3,
+		milestoneDescr3: req.body.description3,
+		percentPayout4: req.body.payout4,
+		milestoneDeadline4: req.body.deadline4,
+		milestoneDescr4: req.body.description4,
+
 	});
+	newProj.save();
+
+	
+
 });
 
 
@@ -112,8 +192,4 @@ app.post('/account_creation.html', function(req,res)
 
 
 
-
-
-
-
-
+// images: make sure no slashes; use multer

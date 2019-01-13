@@ -4,6 +4,21 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script type="text/javascript">
+			function contributions()	{
+				var payouts = [25, 25, 25, 25];
+				var input = document.getElementById("input");
+				var output1 = document.getElementById("output1");
+				var output2 = document.getElementById("output2");
+				var output3 = document.getElementById("output3");
+				var output4 = document.getElementById("output4");
+				var amount = input.value;
+				output1.value = amount*payout[0]/100;
+				output2.value = amount*payout[1]/100;
+				output3.value = amount*payout[2]/100;
+				output4.value = amount*payout[3]/100;
+			}
+		</script>
 	</head>
 
 	<body class="is-preload">
@@ -89,22 +104,19 @@
 
 				<div style="width: 100%" id="main">
 				<!-- Welcome Message -->
-					<h3 style="text-align: center">Sign up for free below! </h3>
+					<h3 style="text-align: center">Contribute what you would like below: </h3>
 
 				<!-- Login Form -->
-					<form action="/account_creation.html/" method="post" style="padding: 2% 20% 0 20%">
+					<form action="/contribute.html/" method="post" style="padding: 2% 20% 0 20%">
 						<br>
-						<input type="text" name="firstname" placeholder="First Name">
+						<input type="number" id="input" name="amount" placeholder="Contribution Amount"/>
 				      	<br><br>
-						<input type="text" name="lastname" placeholder="Last Name">
-						<br><br>
-						<input type="text" name="email" placeholder="Email Address">
-						<br><br>
-						<input type="text" name="username" placeholder="Username">
-						<br><br>
-						<input type="password" name="password" placeholder="Password">
-						<br><br>
-						<input type="submit" value="Sign Up">
+						<input type="button" value = "Calculate Milestone Contributions" onclick = "contributions()"/>
+						<input type="text" id="output1"/>
+						<input type="text" id="output2"/>
+						<input type="text" id="output3"/>
+						<input type="text" id="output4"/>
+						<input type="submit" value="Submit Contribution">
 					</form>
 				</div> 
 			</div>

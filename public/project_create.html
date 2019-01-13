@@ -16,12 +16,12 @@
 						<h1><a href="index.html">MABAE</a></h1>
 						<nav class="links">
 							<ul>
-								<li><a href="#"> <strong>Create-A-Project</strong> </a></li>
+								<li><a href="project_create.html"> <strong>Create-A-Project</strong> </a></li>
 								<li><a href="#">Arts</a></li>
 								<li><a href="#">Technology</a></li>
 								<li><a href="#">Food</a></li>
 								<li><a href="#">Games</a></li>
-								<li style="float: right; border-style: none; padding-bottom: 2px;"><a href="login.html"class="button large fit">Log In</a></li>
+								<li style="float: right; border-style: none; padding-bottom: 2px;"><a href="/login"class="button large fit">Log In</a></li>
 									
 							</ul>
 								
@@ -43,12 +43,56 @@
 						</nav>
 					</header>
 
+					<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>My Profile</h3>
+											
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Projects</h3>
+											
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Settings</h3>
+											
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="/login" class="button large fit">Log In</a></li>
+									<li><a href="account_creation.html" class="button large fit">Register Now</a></li>
+								</ul>
+							</section>
+
+					</section>
+
 				<!-- Welcome Message -->
-				<div style="width: 95%">
+				<div style="width: 100%" id="main">
 				<h3 style="text-align: center; max-height:50px;">Project Creation: </h3>
 
 				<!-- Login Form -->
-				<form action="/project_create.html/" method="post" style="padding: 2% 20% 0 20%">
+				<form action="/project_submit/" method="post" style="padding: 2% 20% 0 20%" enctype="multipart/form-data" id="project_form">
 					<br>
 					<input type="text" name="projectname" placeholder="Project Name" style="display:inline-block;">
 					<br><br>
@@ -59,17 +103,60 @@
 					<option value="Food" id="Food">Food</option>
 					<option value="Games" id="Games">Games</option>
 					</select>
+					<br>
+						<input type="number" name="fund_goal" placeholder= "Fundraising Goal">
+						<br><br>
+					<input type="text" name="description" placeholder="Brief Description" style="display:inline-block; height: 15%">
 					<br><br>
-					<input type="text" name="email" placeholder="Email Address" style="display:inline-block;">
+					<input type="file" name="pic" accept="image/*">
 					<br><br>
-					<input type="text" name="username" placeholder="Username" style="display:inline-block;">
+					<h2>Milestones:</h2>
+					<h3 style="padding-left: 2.5%; margin-bottom: .75em;">Milestone 1</h3>
+					<br>
+					<input style="margin-left: 2.5%" type="number" name="payout1" placeholder="% Payout" min="0" max="100">
 					<br><br>
-					<input type="password" name="password" placeholder="Password" style="display:inline-block;">
+					<p style="display:inline-block; margin-left: 2.5%;">Milestone 1 Deadline    </p>
+					<input type="date" name="deadline1" placeholder="Milestone 1 Deadline" style="display:inline-block; margin-left: 2.5%;">
+					<input type="text" name="description1" placeholder="Milestone 1 Description" style="display:inline-block; height: 10%; margin-left: 2.5%;">
+					<br><br><br>
+					<h3 style="padding-left: 2.5%; margin-bottom: .75em;">Milestone 2</h3>
+					<br>
+					<input style="margin-left: 2.5%" type="number" name="payout2" placeholder="% Payout" min="0" max="100">
 					<br><br>
-					<input type="submit" value="Sign Up">
+					<p style="display:inline-block; margin-left: 2.5%;">Milestone 2 Deadline    </p>
+					<input type="date" name="deadline2" placeholder="Milestone 2 Deadline" style="display:inline-block; margin-left: 2.5%;">
+					<input type="text" name="description2" placeholder="Milestone 2 Description" style="display:inline-block; height: 10%; margin-left: 2.5%;">
+					<br><br><br>
+					<h3 style="padding-left: 2.5%; margin-bottom: .75em;">Milestone 3</h3>
+					<br>
+					<input style="margin-left: 2.5%" type="number" name="payout3" placeholder="% Payout" min="0" max="100">
+					<br><br>
+					<p style="display:inline-block; margin-left: 2.5%;">Milestone 3 Deadline    </p>
+					<input type="date" name="deadline3" placeholder="Milestone 3 Deadline" style="display:inline-block; margin-left: 2.5%;">
+					<input type="text" name="description3" placeholder="Milestone 3 Description" style="display:inline-block; height: 10%; margin-left: 2.5%;">
+					<br><br><br>
+					<h3 style="padding-left: 2.5%; margin-bottom: .75em;">Milestone 4</h3>
+					<br>
+					<input style="margin-left: 2.5%" type="number" name="payout4" placeholder="% Payout" min="0" max="100">
+					<br><br>
+					<p style="display:inline-block; margin-left: 2.5%;">Milestone 4 Deadline    </p>
+					<input type="date" name="deadline4" placeholder="Milestone 4 Deadline" style="display:inline-block; margin-left: 2.5%;">
+					<input type="text" name="description4" placeholder="Milestone 4 Description" style="display:inline-block; height: 10%; margin-left: 2.5%;">
+					<br><br>
+					<p style="display:inline-block; float:left; padding-right: 5%">Final Project Deadline    </p>
+					<input type="date" name="projectdeadline" placeholder="Project Deadline" style="display:inline-block;">
+					<br><br>
+					<input type="submit" value="Create Project">
 				</form>
 				</div> 
 			</div>
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
 	</body>
 </html>
 
