@@ -73,12 +73,13 @@ app.post('/login', function(req,res)
 app.get("/projects/:id", function(req, res, cb){
 	var id = ObjectId(req.params.id);
 	
-	var query = Project.findOne({_id = id}, function(err, project)
+	var query = Project.findOne({_id:id}, function(err, project)
 	{
 		if(err) return cb(err);
 
 		//if no error, then we know project
 
+		res.render("single.ejs", {title: project.title, description: project.briefDescription, imageName: "/images/" + project.image); 
 
 	});
 });
