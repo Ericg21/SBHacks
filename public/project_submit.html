@@ -4,21 +4,6 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<script type="text/javascript">
-			function contributions()	{
-				var payout = [25, 25, 25, 25];
-				var input = document.getElementById("input");
-				var output1 = document.getElementById("output1");
-				var output2 = document.getElementById("output2");
-				var output3 = document.getElementById("output3");
-				var output4 = document.getElementById("output4");
-				var amount = input.value;
-				output1.value = amount*payout[0]/100;
-				output2.value = amount*payout[1]/100;
-				output3.value = amount*payout[2]/100;
-				output4.value = amount*payout[3]/100;
-			}
-		</script>
 	</head>
 
 	<body class="is-preload">
@@ -102,31 +87,9 @@
 
 					</section>
 
-				<div style="width: 100%; text-align:center;" id="main">
 				<!-- Welcome Message -->
-					<h3 style="text-align: center">Contribute what you would like below: </h3>
-
-				<!-- Login Form -->
-					<form action="/contribute/" method="post" style="padding: 2% 20% 0 20%">
-						<br>
-						<input type="number" id="input" name="amount" placeholder="Contribution Amount" style="width:25%;"/>
-				      	<br><br>
-						<input type="button" value = "Calculate Milestone Contributions" onclick = "contributions()"/>
-						<br><br>
-						<div>
-							<h4 style="display:inline-block; width:20%; margin-left:2%; margin-right:2%">Milestone 1</h4>
-							<h4 style="display:inline-block; width:20%; margin-left:2%; margin-right:2%">Milestone 2</h4>
-							<h4 style="display:inline-block; width:20%; margin-left:2%; margin-right:2%">Milestone 3</h4>
-							<h4 style="display:inline-block; width:20%; margin-left:2%; margin-right:2%">Milestone 4</h4>
-						</div>
-						<input type="text" id="output1" style="display:inline-block; width:20%; margin-left:2%; margin-right:2%"/>
-						<input type="text" id="output2" style="display:inline-block; width:20%; margin-left:2%; margin-right:2%"/>
-						<input type="text" id="output3" style="display:inline-block; width:20%; margin-left:2%; margin-right:2%"/>
-						<input type="text" id="output4" style="display:inline-block; width:20%; margin-left:2%; margin-right:2%"/>
-						<br><br><br>
-						<input type="submit" value="Submit Contribution">
-					</form>
-				</div> 
+				<div style="width: 100%" id="main">
+				<h3 style="text-align: center; max-height:50px;">Project Submission complete! Project has been added to My Projects.</h3>
 			</div>
 
 			<script src="assets/js/jquery.min.js"></script>
