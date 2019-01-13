@@ -11,6 +11,9 @@ var app = express();
 app.use(session({ secret: 'WESHOULDCHANGETHISINTOSOMETHINGIFTHISISFORREAL', cookie: {maxAge: 60000}}));
 app.use(morgan('dev'));
 
+const Storage = require('@google-cloud/storage');
+const storage = Storage();
+
 var ObjectId = mongoose.Types.ObjectId;
 
 
@@ -121,7 +124,7 @@ app.post('/account_creation.html', function(req,res)
 
 
 //Multer setup
-var storage = multer.diskStorage
+/*var storage = multer.diskStorage
 ({
  	destination: './public/assets/images',
 	filename: function(req, file, cb) {
@@ -132,15 +135,28 @@ var storage = multer.diskStorage
 		
 		cb(null, file.fieldname + '-' + Date.now() + filetypes[file.mimetype]);
 	}
-});
-var upload = multer({ storage: storage })
+});*/
+var upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 25*1000*1000 }})
+
+const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
 
 //load project schema and collection
 var Project = mongoose.model('projects', projectSchema);
 
 
-app.post('/project_create/', upload.single('pic'), function(req,res)
+app.post('/project_create/', upload.single('pic'), function(req,res,cb)
 {
+	var file = req.file;
+	var filetypes = {"image/gif": ".gif", "image/jpeg" : ".jpg", "image/x-citrix-jpeg": ".jpg", "image/png": ".png", "image/x-citrix-png": ".png", "image/x-png": ".png"}
+	if(!(file.mimetype in filetypes)) {
+		return cb(new Error("Mimetype not supported"));
+	}
+	
+
+	const blob = bucket.file("pic" + '-' + Date.now() + filetypes[file.mimetype]);
+	const blobStream = blob.createWriteStream();
+	blobStream.end(req.file.buffer);
+
 	//get image		
 	if (!req.file) {
 	    console.log("No file received");
@@ -150,13 +166,14 @@ app.post('/project_create/', upload.single('pic'), function(req,res)
 		//multer has automatically saved it
 	}
 
+	blobStream.on('finish', () => {
 	//create new project
 	var newProj = new Project(
 	{
 		title: req.body.projectname,
 		briefDescription: req.body.description,
 		deadlineDate: req.body.projectdeadline,
-		image: req.file.filename,
+		image: 'https://storage.googleapis.com/'+bucket.name+'/'+blob.name,
 		category: req.body.Category,
 		percentPayout1: req.body.payout1,
 		milestoneDeadline1: req.body.deadline1,
@@ -175,7 +192,8 @@ app.post('/project_create/', upload.single('pic'), function(req,res)
 	});
 	newProj.save();
 
-    res.redirect("/project_submit.html")	
+    	res.redirect("/project_submit.html")	
+	});
 
 });
 

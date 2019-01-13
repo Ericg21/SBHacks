@@ -10,7 +10,8 @@
     "express-session": "^1.15.6",
     "mongoose": "^5.4.3",
     "morgan": "^1.9.1",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "@google-cloud/storage" : "1.6.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -26,5 +27,23 @@
   "bugs": {
     "url": "https://github.com/Ericg21/SBHacks-MABAE-/issues"
   },
-  "homepage": "https://github.com/Ericg21/SBHacks-MABAE-#readme"
+  "homepage": "https://github.com/Ericg21/SBHacks-MABAE-#readme",
+  "cloud-repo-tools": {
+    "requiresProjectId": true,
+    "requiresKeyFile": true,
+    "test": {
+      "app": {
+        "requiredEnvVars": [
+          "GCLOUD_STORAGE_BUCKET"
+        ],
+        "msg": "<input type=\"file\" name=\"file\">",
+        "substitutions": "YOUR_BUCKET_NAME=$GCLOUD_STORAGE_BUCKET"
+      },
+      "build": {
+        "requiredEnvVars": [
+          "GCLOUD_STORAGE_BUCKET"
+        ]
+      }
+    }
+  }
 }
