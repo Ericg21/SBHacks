@@ -8,11 +8,11 @@ Schema = module.exports.Schema
 module.exports.ProjectSchema = new Schema
 ({
 	title: String, //this represents text in bold at top of entry
-	shortDescription: String, //text right below title
-	longDescription: String, //text at bottom of entry
+	briefDescription: String, //text right below title
 	image: String, //text representing name of image file
 	creator: String, //name of user who created project
-	dateSubmitted: String  
+	dateSubmitted: String, //format: year-month-day,
+	category: String //category project fits into
 });
 ProjectSchema = module.exports.ProjectSchema
 
