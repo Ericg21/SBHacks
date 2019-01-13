@@ -72,6 +72,8 @@ app.post('/login', function(req,res)
 app.get("/", function(req, res) {
 	var query_all_projs = Project.find({}, function(err, projects)
 	{
+		console.log(projects[0]);
+		console.log(projects[0].deadlineDate);
 		res.render("index.ejs", {projects:projects});
 	});
 });
@@ -153,7 +155,7 @@ app.post('/project_create/', upload.single('pic'), function(req,res)
 	{
 		title: req.body.projectname,
 		briefDescription: req.body.description,
-		deadlineDate: req.body.deadline,
+		deadlineDate: req.body.projectdeadline,
 		image: req.file.filename,
 		category: req.body.Category,
 		percentPayout1: req.body.payout1,

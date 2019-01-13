@@ -24,18 +24,20 @@ module.exports = new Schema
 	percentPayout4: Number, 
 	milestoneDeadline4: String,
 	milestoneDescr4:String,
-	finalDeadline: String, //format: year-month-day,
+	deadlineDate: String, //format: year-month-day,
 	currentFundraising: Number, //current fundraising sum
 	creator: String //creator of project
 });
 
 module.exports.virtual('formattedFinalDeadline').get(function()
 {
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+    var months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
                     'September', 'October', 'November', 'December']
-    var year = this.finalDeadline(0,4);
-    var month = this.finalDeadine(5,7);
-    var day = this.finalDeadline(9,11);
+    var year = this.deadlineDate.substring(0,4);
+    var month = parseInt(this.deadlineDate.substring(5,7));
+    var day = this.deadlineDate.substring(8,10);
+
+    console.log("year: " + year + ", month: " + month + "day: " + day);
 
     return months[month] + " " + day + ", " + year;
 });
