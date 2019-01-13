@@ -68,6 +68,7 @@ app.post('/login', function(req,res)
 });
 
 
+
 //Register account creation
 app.post('/account_creation.html', function(req,res)
 {
@@ -106,6 +107,10 @@ var storage = multer.diskStorage
 });
 var upload = multer({ storage: storage })
 
+//load project schema and collection
+var Project = mongoose.model('projects', projectSchema);
+
+
 app.post('/project_create.html', upload.single('pic'), function(req,res)
 {
 	//get image		
@@ -114,14 +119,23 @@ app.post('/project_create.html', upload.single('pic'), function(req,res)
         } 
 	else {
 		console.log('file received');
+		//multer has automatically saved it
 	}
 
+	//create new project
+	var newProj = new Project(
+	{
+		title: req.body.projectname,
+		briefDescription: req.body.description,
+		deadlineDate: req.body.deadline,
+		image: req.file.filename,
+		category: req.body.Category
+	});
+	newProj.save();
 
-
+	
 
 });
-
-
 
 
 
