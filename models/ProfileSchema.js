@@ -3,7 +3,6 @@ var bcrypt = require('bcrypt');
 module.exports = {} 
 
 Schema = mongoose.Schema;
-module.exports.Schema = Schema;
 
 module.exports.ProfileSchema = new Schema
 ({

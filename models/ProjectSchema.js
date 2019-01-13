@@ -2,10 +2,9 @@ var mongoose = require('mongoose');
 module.exports = {} 
 
 //make it so we can export this variable
-module.exports.Schema = mongoose.Schema;
-Schema = module.exports.Schema
+Schema = mongoose.Schema;
 
-module.exports.ProjectSchema = new Schema
+module.exports = new Schema
 ({
 	title: String, //this represents text in bold at top of entry
 	briefDescription: String, //text right below title
@@ -14,7 +13,6 @@ module.exports.ProjectSchema = new Schema
 	dateSubmitted: String, //format: year-month-day,
 	category: String //category project fits into
 });
-ProjectSchema = module.exports.ProjectSchema
 
 
 
