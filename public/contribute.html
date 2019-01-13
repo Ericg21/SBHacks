@@ -1,0 +1,153 @@
+<html>
+	<head>
+		<title>Future Imperfect by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script type="text/javascript">
+			function contributions()	{
+				var input = document.getElementById("input");
+				var output1 = document.getElementById("output1");
+				var output2 = document.getElementById("output2");
+				var output3 = document.getElementById("output3");
+				var output4 = document.getElementById("output4");
+				var amount = input.value;
+				output1 = amount*.25;
+				output2 = amount*.25;
+				output3 = amount*.25;
+				output4 = amount*.25;
+			}
+		</script>
+	</head>
+
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">MABAE</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="project_create.html"> <strong>Create-A-Project</strong> </a></li>
+								<li><a href="#">Arts</a></li>
+								<li><a href="#">Technology</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Games</a></li>
+								<li style="float: right; border-style: none; padding-bottom: 2px;"><a href="/login"class="button large fit">Log In</a></li>
+									
+							</ul>
+								
+
+						</nav>
+						<nav class="main">
+							<ul>
+
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+					<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>My Profile</h3>
+											
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Projects</h3>
+											
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Settings</h3>
+											
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="/login" class="button large fit">Log In</a></li>
+									<li><a href="account_creation.html" class="button large fit">Register Now</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<div style="width: 100%" id="main">
+				<!-- Welcome Message -->
+					<h3 style="text-align: center">Contribute what you would like below: </h3>
+
+				<!-- Login Form -->
+					<form action="/contribute.html/" method="post" style="padding: 2% 20% 0 20%">
+						<br>
+						<input type="number" id="input" name="amount" placeholder="Contribution Amount"/>
+				      	<br><br>
+						<input type="button" value = "Calculate Milestone Contributions" onclick = "contributions()"/>
+						<input type="text" id="output1"/>
+						<input type="text" id="output2"/>
+						<input type="text" id="output3"/>
+						<input type="text" id="output4"/>
+						<input type="submit" value="Sign Up">
+					</form>
+				</div> 
+			</div>
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
